@@ -1,3 +1,5 @@
+//https://stackoverflow.com/questions/6449611/check-whether-a-value-is-a-number-in-javascript-or-jquery
+
 //selection
 const filterInputElem = document.querySelector(".filter");
 const productListUl = document.querySelector(".collection");
@@ -58,7 +60,7 @@ const showMessage = (message = "") => {
 };
 
 const getData = (productList) => {
-  productListUl.innerHTML = '';
+  productListUl.innerHTML = "";
   if (productList.length > 0) {
     productList.forEach(({ id, name, price }) => {
       // const { id, name, price } = product;
@@ -81,15 +83,15 @@ const getData = (productList) => {
 // getData(productData);
 
 const resetInput = () => {
-  nameInputElem.value = '';
-  priceInputElem.value = '';
-}
+  nameInputElem.value = "";
+  priceInputElem.value = "";
+};
 
 const resetUI = () => {
-  addBtnElem.style.display = 'block';
-  document.querySelector('.update-btn').remove();
-  document.querySelector('#id').remove();
-}
+  addBtnElem.style.display = "block";
+  document.querySelector(".update-btn").remove();
+  document.querySelector("#id").remove();
+};
 
 //add or update product
 const addOrUpdateProduct = (e) => {
@@ -118,7 +120,7 @@ const updateProduct = (e) => {
         ...product, // ...products mane - arry er baki sob kichu jemon id, ba onno product unchanged thakbe, just 'name' and 'price' ta update hoye new modify array return korbe
         name,
         price,
-      }
+      };
     } else {
       return product;
     }
@@ -130,7 +132,6 @@ const updateProduct = (e) => {
   localStorage.setItem("productItems", JSON.stringify(productData));
   //UI LEVEL UPDATES
   getData(productData);
-
 };
 
 //add item to the store and UI
@@ -144,7 +145,7 @@ const addProduct = (e) => {
   } else {
     id = productData[productData.length - 1].id + 1;
   }
-
+  //https://stackoverflow.com/questions/6449611/check-whether-a-value-is-a-number-in-javascript-or-jquery
   if (
     name === "" ||
     price === "" ||
@@ -163,7 +164,7 @@ const addProduct = (e) => {
     saveDataToLocalStorage(data);
     productListUl.innerHTML = "";
     getData(productData);
-    resetInput()
+    resetInput();
     msg.innerText = "";
   }
 };
@@ -178,19 +179,19 @@ const populateEditForm = (product) => {
   priceInputElem.value = product.price;
 
   //id element
-  const idElem = `<input type="hidden" id="id" value=${product.id}>`
+  const idElem = `<input type="hidden" id="id" value=${product.id}>`;
 
   //update submit button
   const btnElem = `<button type="button" class="btn btn-info update-btn w-100 mt-2 text-white">Update</button>`;
 
-  if(document.querySelector('#id')) {
-    document.querySelector('#id').setAttribute('value', product.id)
-  }// if we have hidden id input then if we click another item that time hidden input value will be changed by this clicked item
+  if (document.querySelector("#id")) {
+    document.querySelector("#id").setAttribute("value", product.id);
+  } // if we have hidden id input then if we click another item that time hidden input value will be changed by this clicked item
 
-  if(!document.querySelector('.update-btn')) {
+  if (!document.querySelector(".update-btn")) {
     document.forms[0].insertAdjacentHTML("beforeend", idElem);
     document.forms[0].insertAdjacentHTML("beforeend", btnElem);
-  }// if we already have update button then it will not show again
+  } // if we already have update button then it will not show again
 
   //hide submit button
   addBtnElem.style.display = "none";
